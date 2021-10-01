@@ -6,6 +6,7 @@ The web application allows you to uploads books and share them with others, also
 
 ## Screenshots
 
+
 Registration
 ![СнимокReg](https://user-images.githubusercontent.com/39008904/135582992-98b7a648-3003-4cac-a01e-6034b8cecd6a.PNG)
 

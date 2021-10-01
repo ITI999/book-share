@@ -9,10 +9,13 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     function signin(Request $req){
+        $req->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
         $formFields = $req->only(['email','password']);
-
         if(Auth::attempt($formFields)){
-            return redirect()->intended(route('books'));
+            return redirect()->intended(route('private'));
         }
 
         return redirect(route('login'))->withErrors([
@@ -29,11 +32,11 @@ class UserController extends Controller
 
         $validateFields = $req->validate([
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required|min:8|max:50'
         ]);
 
         if(User::where('email',$validateFields['email'])->exists()){
-            return redirect(route('books'))->withErrors([
+            return redirect(route('register'))->withErrors([
                 'email' => 'Такой email уже зарегистрирован'
             ]);
         }
@@ -43,7 +46,7 @@ class UserController extends Controller
             Auth::login($user);
             return redirect()->to(route('books'));
         }
-        return redirect(route('books'))->withErrors([
+        return redirect(route('register'))->withErrors([
             'formError' => 'Произошла ошибка при сохранении пользователя'
         ]);
     }

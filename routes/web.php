@@ -16,7 +16,7 @@ use App\Http\Controllers\AccountController;
 |
 */
 Route::get('/', function () {
-    return view('books');
+    return redirect(\route('books'));
 });
 
 Route::get('/books',[BookController::class,'getAllBooks'])->name('books');

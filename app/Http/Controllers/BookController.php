@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 class BookController extends Controller
 {
     public function add(Request $req){
+        $req->validate([
+            "file" => 'required'
+        ]);
         $formFields = $req->only(['title','author','description','image','file']);
         if(isset($formFields['image'])){
             $path = $req->file('image')->store('uploads','public');
